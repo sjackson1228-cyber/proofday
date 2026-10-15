@@ -14,7 +14,7 @@ async function post(ev, { badSig = false } = {}) {
   const out = `${r.status} ${await r.text()}`; console.log(`POST ${ev.id} (${ev.data.object.id})${badSig ? ' [bad sig]' : ''} -> ${out}`); return out;
 }
 (async () => {
-  const A = event('evt_test_happy_proofday', 'cs_test_a1ProofdaySelf0001', 'https://proofday.vercel.app/', 'Read the offer, run the free preview, download the sample report');
+  const A = event('evt_test_happy_proofday', 'cs_test_a1ProofdaySelf0001', 'https://getproofday.com/', 'Read the offer, run the free preview, download the sample report');
   const B = event('evt_test_happy_books', 'cs_test_b1BooksToscrape0001', 'https://books.toscrape.com/', 'Browse categories and open a book detail page');
   const C = event('evt_test_fail_unreachable', 'cs_test_c1Unreachable00001', 'https://no-such-host.proofday-test.invalid/', 'n/a');
   await post(A); await post(B); await post(C);

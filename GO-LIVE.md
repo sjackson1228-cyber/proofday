@@ -19,7 +19,7 @@ Run from /workspace/pdrepo/site (linked to beaver16/proofday). Scope: --scope be
    - printf %s "$RESEND_KEY"   | vercel env add RESEND_API_KEY production   (new sending-only key, domain getproofday.com)
    - printf %s https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar | vercel env add CHROMIUM_PACK_URL production
    - openssl rand -hex 24 | tr -d '\n' | vercel env add CRON_SECRET production
-4. Site: add Buy button on index.html -> live Payment Link (owner approval), fix canonical URLs proofday.vercel.app -> getproofday.com.
+4. Site: add Buy button on index.html -> live Payment Link (owner approval), fix canonical URLs getproofday.com -> getproofday.com.
 5. Ship: open PR stripe-test-checkout -> main, review, merge (or `vercel deploy --prod` from the branch). Crons run on production deployments only:
    /api/cron-orders every 10 min (vercel.json); Vercel sends Authorization: Bearer $CRON_SECRET automatically.
 6. Verify: vercel crons ls (or Project > Settings > Cron Jobs); one real $149 live purchase + refund via Dashboard; check Resend delivery + PDF.

@@ -17,5 +17,5 @@ module.exports = {
   ownerEmail: process.env.OWNER_EMAIL || 'proofday-test@mail.grokbot.com',
   // Stripe Payment Link custom field keys (set these exact keys when creating the Payment Link)
   fieldUrl: 'site_url', fieldGoal: 'visitor_goal',
-  publicBaseUrl: process.env.PUBLIC_BASE_URL || 'https://proofday.vercel.app',
+  publicBaseUrl: process.env.PUBLIC_BASE_URL || 'https://getproofday.com',
 };
