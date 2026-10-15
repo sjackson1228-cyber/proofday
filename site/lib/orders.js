@@ -9,7 +9,7 @@ async function createOnce(o) {
   try { await put(key(o.sessionId), JSON.stringify(o), { access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: false }); return true; }
   catch (e) { if (/already exists/i.test(e.message)) return false; throw e; }
 }
-function runEngine(o, out) { return new Promise((res, rej) => execFile(process.execPath, [path.join(process.cwd(), 'lib', 'engine.js'), o.siteUrl, '--out', out, '--note', o.goal || '', '--client', o.email], { timeout: 700e3 }, (err, so, se) => err ? rej(new Error((se || err.message).slice(-500))) : res())); }
+function runEngine(o, out) { return new Promise((res, rej) => execFile(process.execPath, [path.join(__dirname, 'engine.js'), o.siteUrl, '--out', out, '--note', o.goal || '', '--client', o.email], { timeout: 700e3 }, (err, so, se) => err ? rej(new Error((se || err.message).slice(0, 1500))) : res())); }
 async function sendResend(o, pdfBuf, verdict, counts) {
   const host = new URL(o.siteUrl).hostname;
   const r = await fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json', 'Idempotency-Key': `${o.orderId}__report` },
@@ -34,3 +34,6 @@ async function process1(o) {
 }
 async function pending() { const { blobs } = await list({ prefix: 'orders/' }); const out = []; for (const b of blobs) { const o = await getJson(b.pathname); if (o && (o.status === 'pending' || o.status === 'running')) out.push(o); } return out; }
 module.exports = { createOnce, process1, pending };
+
+// file-tracing hints: engine.js runs as a child process, so pull its deps into the bundle
+function _trace() { require('playwright-core'); require('@sparticuz/chromium-min'); require('./engine.js'); }
