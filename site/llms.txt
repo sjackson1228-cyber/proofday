@@ -1,0 +1,11 @@
+# Proofday
+> Proofday sells a $149 Website Launch Check for small owner-led web agencies and freelancers launching client websites.
+
+## Offer
+- Customer submits a URL (up to 10 public pages they own or are authorized to test) and a note on what visitors should be able to do.
+- Delivered: mobile (390x844) + desktop (1366x768) report with screenshots, reproducible issues (navigation, broken links, mobile display problems, missing content, observable load issues), repair instructions, and one retest.
+- Not included: hosting, repairs, unlimited support, calls, security certification, or any promise that every issue is found. Untestable features (logins, forms, payments, email) are marked "not tested".
+
+## Links
+- Home: https://proofday.vercel.app/
+- Sample report (PDF): https://proofday.vercel.app/sample-report.pdf

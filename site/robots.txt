@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://proofday.vercel.app/sitemap.xml
