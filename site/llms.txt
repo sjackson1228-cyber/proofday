@@ -10,3 +10,11 @@
 - Home: https://proofday.vercel.app/
 - Sample report (PDF): https://proofday.vercel.app/sample-report.pdf
 - Free quick preview (one page, HTML-only): https://proofday.vercel.app/scan
+
+## Guides
+- Website launch checklist (36 pre-launch checks, 14 automated by Proofday): https://proofday.vercel.app/website-launch-checklist
+- Webflow site QA before launch (23-step checklist): https://proofday.vercel.app/webflow-site-qa-before-launch
+
+## Facts
+- Price: $149 USD, one site, one retest. Ordering/checkout not live yet.
+- Not tested: form submissions, payments, logins, email delivery, Safari/Firefox rendering, real devices.
