@@ -8,11 +8,11 @@
 <link rel="canonical" href="https://proofday.vercel.app/">
 <meta property="og:title" content="Proofday — Website Launch Check ($149)">
 <meta property="og:description" content="Mobile + desktop launch report with screenshots, reproducible issues and repair instructions. One retest included.">
-<meta property="og:type" content="website">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Proofday"><meta name="twitter:title" content="Proofday — Website Launch Check ($149)"><meta name="twitter:description" content="Mobile + desktop launch report with screenshots, reproducible issues and repair instructions. One retest included.">
 <meta property="og:url" content="https://proofday.vercel.app/">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%232f5bea'/><path d='M9 17l5 5 9-11' stroke='white' stroke-width='3.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Website Launch Check","provider":{"@type":"Organization","name":"Proofday","url":"https://proofday.vercel.app/"},"offers":{"@type":"Offer","price":"149","priceCurrency":"USD"},"description":"Automated mobile and desktop pre-launch check of up to 10 public pages with screenshots, reproducible issues, repair instructions and one retest."}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://proofday.vercel.app/#org", "name": "Proofday", "url": "https://proofday.vercel.app/", "description": "Automated pre-launch website checks for small web agencies and freelancers."}, {"@type": ["Service", "Product"], "@id": "https://proofday.vercel.app/#launch-check", "name": "Proofday Website Launch Check", "brand": {"@id": "https://proofday.vercel.app/#org"}, "provider": {"@id": "https://proofday.vercel.app/#org"}, "description": "Automated desktop (1366x768) and mobile (390x844) check of up to 10 public pages: broken links, sideways scrolling on mobile, missing viewport tag, JavaScript console errors, failed images/scripts/styles, load timing, titles, meta descriptions, H1s, image alt text. Report with Pass / Needs fixes / Fail verdict, developer tickets, full-page screenshots and one retest.", "offers": {"@type": "Offer", "price": "149.00", "priceCurrency": "USD", "url": "https://proofday.vercel.app/#order", "availability": "https://schema.org/PreOrder"}}, {"@type": "WebSite", "@id": "https://proofday.vercel.app/#site", "name": "Proofday", "url": "https://proofday.vercel.app/", "publisher": {"@id": "https://proofday.vercel.app/#org"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Who is this for?", "acceptedAnswer": {"@type": "Answer", "text": "Small owner-led web agencies and freelancers who want an independent pre-launch check before handing a site to a client."}}, {"@type": "Question", "name": "How long does it take?", "acceptedAnswer": {"@type": "Answer", "text": "The check itself is automated and takes minutes. Ordering isn’t open yet; delivery times will be confirmed at launch."}}, {"@type": "Question", "name": "What’s the difference between the free preview and the $149 check?", "acceptedAnswer": {"@type": "Answer", "text": "The free preview fetches the raw HTML of one page and samples a few links — no browser, no screenshots. The paid check renders up to 10 pages in a real browser on desktop and mobile."}}, {"@type": "Question", "name": "Will you change anything on my site?", "acceptedAnswer": {"@type": "Answer", "text": "No. We only load public pages like a visitor would. Nothing is submitted, purchased or modified."}}, {"@type": "Question", "name": "What if a feature can't be tested?", "acceptedAnswer": {"@type": "Answer", "text": "It's marked “not tested” in the report so nobody assumes it was checked."}}, {"@type": "Question", "name": "Can I talk to someone?", "acceptedAnswer": {"@type": "Answer", "text": "Proofday is deliberately no-call. Questions by email only (address coming soon)."}}]}]}</script>
 <style>
 :root{--b:#2f5bea;--ink:#1d2433;--mute:#5b6476;--line:#e6e9ef;--bg:#f7f8fb}
 *{box-sizing:border-box}body{margin:0;font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink)}
@@ -34,7 +34,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font-si
 </style>
 </head>
 <body>
-<header><div class="wrap"><a class="logo" href="/">Proof<span>day</span></a><nav><a href="#included">What's included</a><a href="#sample">Sample report</a><a href="#order">Order</a><a href="/scan">Free preview</a><a href="#faq">FAQ</a></nav></div></header>
+<header><div class="wrap"><a class="logo" href="/">Proof<span>day</span></a><nav><a href="#included">What's included</a><a href="#sample">Sample report</a><a href="#order">Order</a><a href="/website-launch-checklist">Launch checklist</a><a href="/scan">Free preview</a><a href="#faq">FAQ</a></nav></div></header>
 <main>
 <div class="hero"><div class="wrap">
 <h1>Catch the embarrassing stuff before your client does.</h1>
@@ -81,10 +81,11 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mute);font-si
 <h3>Can I talk to someone?</h3><p>Proofday is deliberately no-call. Questions by email only (address coming soon).</p>
 </div></section>
 
+<section id="guides"><div class="wrap"><h2>Free guides</h2><div class="grid"><div class="card"><h3><a href="/website-launch-checklist">Website launch checklist</a></h3><p>36 pre-launch checks grouped by area, with what can be automated.</p></div><div class="card"><h3><a href="/webflow-site-qa-before-launch">Webflow site QA before launch</a></h3><p>A 23-step checklist for Webflow builds: CMS, responsive layout, embeds, forms.</p></div></div></div></section>
 <section id="newsletter" class="bg"><div class="wrap"><h2>Launch tips, occasionally</h2><p>One short email when we publish a new pre-launch checklist. No spam.</p>
 <form style="display:flex;gap:10px;max-width:520px;flex-wrap:wrap" onsubmit="event.preventDefault();this.querySelector('button').textContent='Thanks — signup opens soon';">
 <!-- NEWSLETTER/CONTACT placeholder: connect to email provider (e.g. Resend audience) before launch --><label for="nl" style="position:absolute;left:-9999px">Email</label>
 <input id="nl" type="email" placeholder="you@agency.com" required style="flex:1;min-width:200px"><button class="btn" type="submit">Subscribe</button></form></div></section>
 </main>
-<footer><div class="wrap">© 2026 Proofday · Website Launch Check · Contact: <span>email coming soon</span> · <a href="/llms.txt">llms.txt</a></div></footer>
+<footer><div class="wrap">© 2026 Proofday · <a href="/">Website Launch Check</a> · <a href="/website-launch-checklist">Website launch checklist</a> · <a href="/webflow-site-qa-before-launch">Webflow QA before launch</a> · <a href="/scan">Free quick preview</a> · <a href="/sample-report.pdf">Sample report</a> · <a href="/llms.txt">llms.txt</a></div></footer>
 </body></html>
