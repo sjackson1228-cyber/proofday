@@ -1,12 +1,14 @@
 // Order store on Vercel Blob (no KV add-on needed). Dedupe: one blob per checkout session, created with allowOverwrite:false.
-const { put, head, list } = require('@vercel/blob');
+const { put, get, list } = require('@vercel/blob');
+// Private store: nothing is reachable by URL; reads go through the SDK with the store token.
+const T = { token: process.env.PRIV_READ_WRITE_TOKEN || process.env.BLOB_READ_WRITE_TOKEN };
 const { execFile } = require('child_process'); const fs = require('fs'), path = require('path'), os = require('os');
 const MAX = 3;
 const key = s => `orders/${s}.json`;
-async function getJson(pathname) { try { const h = await head(pathname); return await (await fetch(h.url + '?t=' + Date.now())).json(); } catch { return null; } }
-async function save(o) { await put(key(o.sessionId), JSON.stringify(o), { access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true }); }
+async function getJson(pathname) { try { const r = await get(pathname, { access: 'private', useCache: false, ...T }); if (!r || r.statusCode !== 200) return null; return JSON.parse(await new Response(r.stream).text()); } catch { return null; } }
+async function save(o) { await put(key(o.sessionId), JSON.stringify(o), { access: 'private', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: true, ...T }); }
 async function createOnce(o) {
-  try { await put(key(o.sessionId), JSON.stringify(o), { access: 'public', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: false }); return true; }
+  try { await put(key(o.sessionId), JSON.stringify(o), { access: 'private', contentType: 'application/json', addRandomSuffix: false, allowOverwrite: false, ...T }); return true; }
   catch (e) { if (/already exists/i.test(e.message)) return false; throw e; }
 }
 function runEngine(o, out) { return new Promise((res, rej) => execFile(process.execPath, [path.join(__dirname, 'engine.js'), o.siteUrl, '--out', out, '--note', o.goal || '', '--client', o.email], { timeout: 700e3 }, (err, so, se) => err ? rej(new Error((se || err.message).slice(0, 1500))) : res())); }
@@ -27,12 +29,12 @@ async function process1(o) {
     const out = fs.mkdtempSync(path.join(os.tmpdir(), 'pd-')); await runEngine(o, out);
     const data = JSON.parse(fs.readFileSync(path.join(out, 'data.json'))); const pdf = fs.readFileSync(path.join(out, 'report.pdf'));
     if (!data.pages || !data.pages.length) throw new Error('site unreachable');
-    const b = await put(`reports/${o.orderId}.pdf`, pdf, { access: 'public', contentType: 'application/pdf', addRandomSuffix: true });
-    o.pdfUrl = b.url; o.verdict = data.verdict; o.emailId = await sendResend(o, pdf, data.verdict, data.counts || {}); o.status = 'delivered';
+    const b = await put(`reports/${o.orderId}.pdf`, pdf, { access: 'private', contentType: 'application/pdf', addRandomSuffix: true, ...T });
+    o.pdfPath = b.pathname; o.verdict = data.verdict; o.emailId = await sendResend(o, pdf, data.verdict, data.counts || {}); o.status = 'delivered';
   } catch (e) { o.lastError = e.message; o.status = o.attempts >= MAX ? 'failed' : 'pending'; }
   await save(o); return o;
 }
-async function pending() { const { blobs } = await list({ prefix: 'orders/' }); const out = []; for (const b of blobs) { const o = await getJson(b.pathname); if (o && (o.status === 'pending' || o.status === 'running')) out.push(o); } return out; }
+async function pending() { const { blobs } = await list({ prefix: 'orders/', ...T }); const out = []; for (const b of blobs) { const o = await getJson(b.pathname); if (o && (o.status === 'pending' || o.status === 'running')) out.push(o); } return out; }
 module.exports = { createOnce, process1, pending };
 
 // file-tracing hints: engine.js runs as a child process, so pull its deps into the bundle
