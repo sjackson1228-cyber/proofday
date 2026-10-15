@@ -1,3 +1,1 @@
-{"cleanUrls":true,
- "functions":{"api/stripe-webhook.js":{"maxDuration":800,"memory":3009},"api/cron-orders.js":{"maxDuration":800,"memory":3009}},
- "crons":[{"path":"/api/cron-orders","schedule":"*/10 * * * *"}]}
+{"cleanUrls": true, "functions": {"api/stripe-webhook.js": {"maxDuration": 800, "memory": 3009, "includeFiles": "lib/**"}, "api/cron-orders.js": {"maxDuration": 800, "memory": 3009, "includeFiles": "lib/**"}}, "crons": [{"path": "/api/cron-orders", "schedule": "*/10 * * * *"}]}
