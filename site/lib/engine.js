@@ -53,7 +53,7 @@ async function evidenceShot(page, marker, file, label) {
   fs.mkdirSync(path.join(OUT, 'shots'), { recursive: true });
   const origin = new URL(START).origin;
   let browser;
-  if (process.env.VERCEL) { const sc = require('@sparticuz/chromium-min'); browser = await chromium.launch({ args: sc.args, executablePath: await sc.executablePath(process.env.CHROMIUM_PACK_URL), headless: true }); }
+  if (process.env.VERCEL) { process.env.AWS_LAMBDA_JS_RUNTIME = process.env.AWS_LAMBDA_JS_RUNTIME || 'nodejs22.x'; const sc = require('@sparticuz/chromium-min'); browser = await chromium.launch({ args: sc.args, executablePath: await sc.executablePath(process.env.CHROMIUM_PACK_URL), headless: true, env: process.env }); }
   else browser = await chromium.launch();
   const ctxs = {};
   for (const [k, v] of Object.entries(VIEWPORTS)) ctxs[k] = await browser.newContext(v);
